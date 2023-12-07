@@ -1,0 +1,31 @@
+import { ChangeEvent } from "react";
+import Curriculo from "@/core/Curriculo"; // Alterar o nome da classe de Evento para Curriculo
+
+interface EntradaProps {
+    tipo?: 'text' | 'number' | 'date';
+    texto: string;
+    valor: any;
+    somenteLeitura?: boolean;
+    onChange?: (valor: any) => void;
+}
+
+export default function Entrada(props: EntradaProps) {
+    return (
+        <div className="flex flex-col mt-3">
+            <label className="mb-2">
+                {props.texto}
+            </label>
+            <input
+                type={props.tipo ?? 'text'}
+                value={props.valor}
+                readOnly={props.somenteLeitura}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => props.onChange?.(e.target.value)}
+                className={` 
+                    border border-indigo-500 rounded-lg
+                    focus:outline-none bg-gray-100 px-4 py-2 
+                    ${props.somenteLeitura ? '' : 'focus:bg-white'}
+                `}
+            />
+        </div>
+    );
+}
